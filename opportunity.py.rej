@@ -1,0 +1,10 @@
+--- ./trytond/trytond/modules/sale_opportunity/opportunity.py
++++ ./trytond/trytond/modules/sale_opportunity/opportunity.py
+@@ -142,7 +160,6 @@
+                     where=sql_table.reference == None))
+             table.not_null_action('reference', action='add')
+ 
+-
+     @classmethod
+     def __setup__(cls):
+         super(SaleOpportunity, cls).__setup__()

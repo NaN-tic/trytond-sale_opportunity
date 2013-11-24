@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tree string="Opportunities per Employee">
+    <field name="employee"/>
+    <field name="number"/>
+    <field name="won"/>
+    <field name="lost"/>
+    <field name="win_rate"/>
+    <field name="expected_amount"/>
+    <field name="won_amount"/>
+    <field name="won_amount_rate"/>
+    <field name="currency"/>
+</tree>
