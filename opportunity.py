@@ -548,6 +548,15 @@ class SaleOpportunityLine(ModelSQL, ModelView):
                     where=sale_line.id == sale_line_id))
             table.drop_column('sale_line', exception=True)
 
+    @classmethod
+    def copy(cls, lines, default=None):
+        if default is None:
+            default = {}
+        default = default.copy()
+        default['sale_lines']=[]
+        res =  super(SaleOpportunityLine, cls).copy(lines, default=default)
+        return res
+
     @staticmethod
     def order_sequence(tables):
         table, _ = tables[None]

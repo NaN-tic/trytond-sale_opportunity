@@ -5,6 +5,7 @@ from functools import wraps
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
+from trytond.pyson import Eval
 
 __all__ = ['Sale', 'SaleLine']
 __metaclass__ = PoolMeta
@@ -70,6 +71,21 @@ class Sale:
 
 class SaleLine:
     __name__ = 'sale.line'
+
+    origin = fields.Reference('Origin', selection='get_origin', select=True,
+        states={
+            'readonly': Eval('_parent_invoice', {}
+                ).get('state') != 'draft',
+            })
+
+    @classmethod
+    def get_origin(cls):
+        Model = Pool().get('ir.model')
+        models = cls._get_origin()
+        models = Model.search([
+                ('model', 'in', models),
+                ])
+        return [(None, '')] + [(m.model, m.name) for m in models]
 
     @classmethod
     def _get_origin(cls):
