@@ -74,8 +74,7 @@ class SaleLine:
 
     origin = fields.Reference('Origin', selection='get_origin', select=True,
         states={
-            'readonly': Eval('_parent_invoice', {}
-                ).get('state') != 'draft',
+            'readonly': Eval('_parent_invoice', {}).get('state') != 'draft',
             })
 
     @classmethod
@@ -89,4 +88,4 @@ class SaleLine:
 
     @classmethod
     def _get_origin(cls):
-        return super(SaleLine, cls)._get_origin() + ['sale.opportunity.line']
+        return ['sale.opportunity.line']
