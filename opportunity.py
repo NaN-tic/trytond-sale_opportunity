@@ -776,7 +776,7 @@ class SaleOpportunityEmployee(ModelSQL, ModelView):
         return self.company.currency.digits
 
     def get_won_amount_rate(self, name):
-        if self.expected_amount:
+        if self.expected_amount and self.won_amount:
             return float(self.won_amount) / float(self.expected_amount) * 100.0
         else:
             return 0.0
@@ -894,7 +894,7 @@ class SaleOpportunityMonthly(ModelSQL, ModelView):
         return self.company.currency.digits
 
     def get_won_amount_rate(self, name):
-        if self.expected_amount:
+        if self.expected_amount and self.won_amount:
             return float(self.won_amount) / float(self.expected_amount) * 100.0
         else:
             return 0.0
@@ -987,7 +987,7 @@ class SaleOpportunityEmployeeMonthly(ModelSQL, ModelView):
         return self.company.currency.digits
 
     def get_won_amount_rate(self, name):
-        if self.expected_amount:
+        if self.expected_amount and self.won_amount:
             return float(self.won_amount) / float(self.expected_amount) * 100.0
         else:
             return 0.0
