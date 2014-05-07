@@ -1,5 +1,5 @@
-#This file is part of Tryton.  The COPYRIGHT file at the top level of
-#this repository contains the full copyright notices and license terms.
+# The COPYRIGHT file at the top level of this repository contains the full
+# copyright notices and license terms.
 "Sales extension for managing leads and opportunities"
 import datetime
 import time
@@ -553,8 +553,8 @@ class SaleOpportunityLine(ModelSQL, ModelView):
         if default is None:
             default = {}
         default = default.copy()
-        default['sale_lines']=[]
-        res =  super(SaleOpportunityLine, cls).copy(lines, default=default)
+        default['sale_lines'] = []
+        res = super(SaleOpportunityLine, cls).copy(lines, default=default)
         return res
 
     @staticmethod
@@ -853,8 +853,8 @@ class SaleOpportunityMonthly(ModelSQL, ModelView):
         opportunity = Opportunity.__table__()
         type_id = cls.id.sql_type().base
         type_year = cls.year.sql_type().base
-        year_column = Extract('YEAR', opportunity.start_date
-            ).cast(type_year).as_('year')
+        year_column = Extract('YEAR',
+            opportunity.start_date).cast(type_year).as_('year')
         month_column = Extract('MONTH', opportunity.start_date).as_('month')
         return opportunity.select(
             Max(Extract('MONTH', opportunity.start_date)
@@ -946,8 +946,8 @@ class SaleOpportunityEmployeeMonthly(ModelSQL, ModelView):
         opportunity = Opportunity.__table__()
         type_id = cls.id.sql_type().base
         type_year = cls.year.sql_type().base
-        year_column = Extract('YEAR', opportunity.start_date
-            ).cast(type_year).as_('year')
+        year_column = Extract('YEAR',
+            opportunity.start_date).cast(type_year).as_('year')
         month_column = Extract('MONTH', opportunity.start_date).as_('month')
         return opportunity.select(
             Max(Extract('MONTH', opportunity.start_date)
