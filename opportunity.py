@@ -64,8 +64,9 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
     currency_digits = fields.Function(fields.Integer('Currency Digits'),
             'get_currency_digits')
     expected_amount = fields.Numeric('Expected Amount',
-            digits=(16, Eval('currency_digits', 2)),
-            depends=['currency_digits'], help='Estimated revenue amount')
+        digits=(16, Eval('currency_digits', 2)),
+        states=_STATES_STOP, depends=_DEPENDS_STOP + ['currency_digits'],
+        help='Estimated revenue amount')
     won_amount = fields.Numeric('Won Amount', readonly=True, states={
                 'invisible': Eval('state') != 'won',
             }, digits=(16, Eval('currency_digits', 2)),
