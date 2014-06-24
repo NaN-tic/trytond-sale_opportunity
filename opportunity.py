@@ -642,7 +642,7 @@ class SaleOpportunityHistory(ModelSQL, ModelView):
         Opportunity = Pool().get('sale.opportunity')
         opportunity_history = Opportunity.__table_history__()
         columns = [
-            Min(Column(opportunity_history, '__id')).as_('id'),
+            Max(Column(opportunity_history, '__id')).as_('id'),
             opportunity_history.id.as_('opportunity'),
             Min(Coalesce(opportunity_history.write_date,
                     opportunity_history.create_date)).as_('date'),
@@ -665,7 +665,15 @@ class SaleOpportunityHistory(ModelSQL, ModelView):
             columns.append(column.as_(name))
             group_by.append(column)
 
-        return opportunity_history.select(*columns, group_by=group_by)
+        where = Column(opportunity_history, '__id').in_(
+            opportunity_history.select(Max(Column(opportunity_history,
+                        '__id')),
+                group_by=(opportunity_history.id,
+                    Coalesce(opportunity_history.write_date,
+                    opportunity_history.create_date))))
+
+        return opportunity_history.select(*columns, where=where,
+            group_by=group_by)
 
     def get_lines(self, name):
         Line = Pool().get('sale.opportunity.line')
