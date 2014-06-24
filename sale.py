@@ -26,7 +26,11 @@ def process_opportunity(func):
 class Sale:
     __name__ = 'sale.sale'
     opportunities = fields.Many2Many('sale.opportunity-sale.sale',
-            'sale', 'opportunity', 'Opportunities')
+            'sale', 'opportunity', 'Opportunities',
+        domain=[
+            ('party', '=', Eval('party')),
+            ],
+        depends=['party'])
 
     @classmethod
     def __setup__(cls):
