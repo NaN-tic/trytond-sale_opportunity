@@ -795,7 +795,7 @@ msgstr "Convertir a oportunidad"
 
 msgctxt "view:sale.opportunity:"
 msgid "Convert to Sale"
-msgstr "Convertir a pedido de venta"
+msgstr "Realizar oferta"
 
 msgctxt "view:sale.opportunity:"
 msgid "Lead/Opportunity"
