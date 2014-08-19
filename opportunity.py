@@ -97,7 +97,7 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
             sort=False, readonly=True)
     probability = fields.Integer('Conversion Probability', required=True,
             states={
-                'readonly': Not(In(Eval('state'), ['opportunity', 'lead'])),
+                'readonly': In(Eval('state'), ['won', 'lost', 'cancelled']),
             }, depends=['state'], help="Percentage between 0 and 100")
     history = fields.One2Many('sale.opportunity.history', 'opportunity',
             'History', readonly=True)
@@ -314,7 +314,6 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
                 invoice_address=self.address,
                 shipment_address=self.address,
                 currency=self.company.currency,
-                comment=self.comment,
                 sale_date=None,
                 )
 

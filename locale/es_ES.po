@@ -15,6 +15,8 @@ msgid ""
 "You cannot delete sale \"%s\" because it is the last sale of opportunity "
 "\"%s\"."
 msgstr ""
+"No puede eliminar la venta \"%s\" porque ésta es la última venta de la "
+"oportunidad \"%s\"."
 
 msgctxt "field:sale.configuration,sale_opportunity_sequence:"
 msgid "Opportunity Reference Sequence"
@@ -156,12 +158,10 @@ msgctxt "field:sale.opportunity-sale.sale,sale:"
 msgid "Sale"
 msgstr "Venta"
 
-#, fuzzy
 msgctxt "field:sale.opportunity-sale.sale,write_date:"
 msgid "Write Date"
 msgstr "Fecha modificación"
 
-#, fuzzy
 msgctxt "field:sale.opportunity-sale.sale,write_uid:"
 msgid "Write User"
 msgstr "Usuario modificación"
@@ -360,7 +360,7 @@ msgstr "Importe ganado"
 
 msgctxt "field:sale.opportunity_employee,won_amount_rate:"
 msgid "Won Amount Rate"
-msgstr ""
+msgstr "Ratio importe ganado"
 
 msgctxt "field:sale.opportunity_employee,write_date:"
 msgid "Write Date"
@@ -795,7 +795,7 @@ msgstr "Convertir a oportunidad"
 
 msgctxt "view:sale.opportunity:"
 msgid "Convert to Sale"
-msgstr "Realizar oferta"
+msgstr "Convertir a pedido de venta"
 
 msgctxt "view:sale.opportunity:"
 msgid "Lead/Opportunity"
