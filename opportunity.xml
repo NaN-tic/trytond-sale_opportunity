@@ -112,7 +112,7 @@ this repository contains the full copyright notices and license terms. -->
         <record model="ir.action.act_window" id="act_sale_form">
             <field name="name">Sales</field>
             <field name="res_model">sale.sale</field>
-            <field name="domain">[("id", "in", Eval('sales'))]</field>
+            <field name="domain">[("opportunities", "in", Eval('active_ids'))]</field>
         </record>
         <record model="ir.action.keyword"
                 id="act_open_sale_keyword1">

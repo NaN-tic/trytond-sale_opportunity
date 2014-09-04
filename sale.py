@@ -47,9 +47,10 @@ class Sale:
     @classmethod
     def delete(cls, sales):
         for sale in sales:
-            if any(len(o.sales) == 1 for o in sale.opportunities):
-                cls.raise_user_error('delete_last_sale',
-                        (sale.rec_name, sale.origin.rec_name))
+            for opportunity in sale.opportunities:
+                if len(opportunity.sales) == 1:
+                    cls.raise_user_error('delete_last_sale',
+                            (sale.rec_name, opportunity.rec_name))
         super(Sale, cls).delete(sales)
 
     @classmethod

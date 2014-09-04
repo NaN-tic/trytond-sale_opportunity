@@ -306,7 +306,7 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
         '''
         Sale = Pool().get('sale.sale')
         with Transaction().set_user(0, set_context=True):
-            return Sale(
+            sale = Sale(
                 description=self.description,
                 party=self.party,
                 payment_term=self.payment_term,
@@ -316,6 +316,9 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
                 currency=self.company.currency,
                 sale_date=None,
                 )
+            if hasattr(self.party, 'customer_payment_type'):
+                sale.payment_type = self.party.customer_payment_type
+        return sale
 
     def create_sale(self):
         '''
