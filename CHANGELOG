@@ -1,3 +1,4 @@
+* Use a view without domain for converted oportunities to avoid validation errors.
 Version 3.4.0 - 2014-11-03
 
 Version 3.2.0 - 2014-04-21

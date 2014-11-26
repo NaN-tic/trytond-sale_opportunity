@@ -705,7 +705,7 @@ class ConvertOpportunity(Wizard):
     'Convert Opportunity'
     __name__ = 'sale.opportunity.convert_opportunity'
     start_state = 'convert'
-    convert = StateAction('sale_opportunity.act_sale_form')
+    convert = StateAction('sale.act_sale_form')
 
     def do_convert(self, action):
         pool = Pool()
