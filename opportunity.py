@@ -23,7 +23,7 @@ __all__ = ['SaleOpportunity', 'OpportunitySale', 'SaleOpportunityLine',
 STATES = [
     ('lead', 'Lead'),
     ('opportunity', 'Opportunity'),
-    ('converted', 'Converted'),
+    ('converted', 'Converted into Sale'),
     ('won', 'Won'),
     ('cancelled', 'Cancelled'),
     ('lost', 'Lost'),
