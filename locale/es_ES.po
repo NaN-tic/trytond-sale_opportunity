@@ -614,8 +614,8 @@ msgstr "Cancelada"
 
 msgctxt ""
 "model:ir.action.act_window.domain,name:act_opportunity_form_domain_converted"
-msgid "Converted"
-msgstr "Convertida"
+msgid "Converted into Sale"
+msgstr "Convertida en venta"
 
 msgctxt ""
 "model:ir.action.act_window.domain,name:act_opportunity_form_domain_leads"
@@ -726,8 +726,8 @@ msgid "Cancelled"
 msgstr "Cancelada"
 
 msgctxt "selection:sale.opportunity,state:"
-msgid "Converted"
-msgstr "Convertida"
+msgid "Converted into Sale"
+msgstr "Convertida en venta"
 
 msgctxt "selection:sale.opportunity,state:"
 msgid "Lead"
@@ -750,8 +750,8 @@ msgid "Cancelled"
 msgstr "Cancelada"
 
 msgctxt "selection:sale.opportunity.history,state:"
-msgid "Converted"
-msgstr "Convertida"
+msgid "Converted into Sale"
+msgstr "Convertida en venta"
 
 msgctxt "selection:sale.opportunity.history,state:"
 msgid "Lead"
@@ -794,8 +794,8 @@ msgid "Convert to Opportunity"
 msgstr "Convertir a oportunidad"
 
 msgctxt "view:sale.opportunity:"
-msgid "Convert to Sale"
-msgstr "Convertir a pedido de venta"
+msgid "Create Sale"
+msgstr "Crear una venta"
 
 msgctxt "view:sale.opportunity:"
 msgid "Lead/Opportunity"
