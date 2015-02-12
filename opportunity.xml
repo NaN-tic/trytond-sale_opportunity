@@ -195,9 +195,20 @@ this repository contains the full copyright notices and license terms. -->
             <field name="name">lost</field>
             <field name="model" search="[('model', '=', 'sale.opportunity')]"/>
         </record>
+
         <record model="ir.model.button-res.group"
             id="opportunity_lost_button_group_opportinity">
             <field name="button" ref="opportunity_lost_button"/>
+            <field name="group" ref="group_opportunity"/>
+        </record>
+        <record model="ir.model.button" id="opportunity_won_button">
+            <field name="name">won</field>
+            <field name="model" search="[('model', '=', 'sale.opportunity')]"/>
+        </record>
+
+        <record model="ir.model.button-res.group"
+            id="opportunity_won_button_group_opportinity">
+            <field name="button" ref="opportunity_won_button"/>
             <field name="group" ref="group_opportunity"/>
         </record>
 

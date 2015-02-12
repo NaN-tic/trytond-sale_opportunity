@@ -51,6 +51,9 @@ this repository contains the full copyright notices and license terms. -->
                 <button name="opportunity"
                     string="Convert to Opportunity"
                     icon="tryton-go-next"/>
+                <button name="won"
+                    string="Won"
+                    icon="tryton-go-next"/>
                 <button name="convert" string="Create Sale"
                     icon="tryton-go-next"/>
             </group>

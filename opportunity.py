@@ -11,7 +11,7 @@ from sql.functions import Extract
 from trytond.model import ModelView, ModelSQL, Workflow, fields
 from trytond.wizard import Wizard, StateView, StateAction, Button
 from trytond import backend
-from trytond.pyson import Equal, Eval, Not, In, If, Get, PYSONEncoder
+from trytond.pyson import Equal, Eval, Not, In, If, Get, PYSONEncoder, And
 from trytond.transaction import Transaction
 from trytond.pool import Pool
 
@@ -163,6 +163,7 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
                 ('opportunity', 'converted'),
                 ('opportunity', 'lead'),
                 ('opportunity', 'lost'),
+                ('opportunity', 'won'),
                 ('opportunity', 'cancelled'),
                 ('converted', 'converted'),
                 ('converted', 'won'),
@@ -189,6 +190,10 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
                     },
                 'cancel': {
                     'invisible': ~Eval('state').in_(['lead', 'opportunity']),
+                    },
+                'won': {
+                    'invisible': And(~Eval('state').in_(['opportunity']),
+                        ~Eval('sale_state').in_(['none']))
                     },
                 })
 
@@ -351,6 +356,8 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
         '''
         Return the sale state for the opportunity.
         '''
+        if not self.sales:
+            return 'none'
         if all(s.state == 'done' for s in self.sales):
             return 'done'
         elif any(s.state in ['confirmed', 'processing', 'done']
@@ -453,6 +460,7 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
         return sales
 
     @classmethod
+    @ModelView.button
     @Workflow.transition('won')
     def won(cls, opportunities):
         cls.set_end_date(opportunities)
@@ -505,6 +513,19 @@ class OpportunitySale(ModelSQL):
             Opportunity.process(Opportunity.browse(opportunity_ids))
             opportunity_table.drop_column('sale', exception=True)
 
+    @classmethod
+    def delete(cls, opportunity_sales):
+        opportunities = [x.opportunity for x in opportunity_sales]
+        super(OpportunitySale, cls).delete(opportunity_sales)
+        for op in opportunities:
+            op.set_sale_state()
+
+
+    @classmethod
+    def create(cls, vlist):
+        res = super(OpportunitySale, cls).create(vlist)
+        for r in res:
+            r.opportunity.set_sale_state()
 
 class SaleOpportunityLine(ModelSQL, ModelView):
     'Sale Opportunity Line'
