@@ -11,7 +11,7 @@ from sql.functions import Extract
 from trytond.model import ModelView, ModelSQL, Workflow, fields
 from trytond.wizard import Wizard, StateView, StateAction, Button
 from trytond import backend
-from trytond.pyson import Equal, Eval, Not, In, If, Get, PYSONEncoder, And
+from trytond.pyson import Equal, Eval, Not, In, If, Get, PYSONEncoder
 from trytond.transaction import Transaction
 from trytond.pool import Pool
 
@@ -192,7 +192,7 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
                     'invisible': ~Eval('state').in_(['lead', 'opportunity']),
                     },
                 'won': {
-                    'invisible': And(~Eval('state').in_(['opportunity']),
+                    'invisible': (~Eval('state').in_(['opportunity']) |
                         ~Eval('sale_state').in_(['none']))
                     },
                 })
