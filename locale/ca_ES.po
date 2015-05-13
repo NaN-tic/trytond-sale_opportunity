@@ -614,7 +614,7 @@ msgstr "Cancel·lat"
 
 msgctxt ""
 "model:ir.action.act_window.domain,name:act_opportunity_form_domain_converted"
-msgid "Converted into Sale"
+msgid "Converted"
 msgstr "Convertides en venda"
 
 msgctxt ""
@@ -816,6 +816,10 @@ msgstr "Iniciatives/Oportunitats"
 msgctxt "view:sale.opportunity:"
 msgid "Set as Lead"
 msgstr "Convertir a iniciativa"
+
+msgctxt "view:sale.opportunity:"
+msgid "Won"
+msgstr "Guanyat"
 
 msgctxt "view:sale.opportunity_employee.open.start:"
 msgid "Sale Opportunities per Employee"
