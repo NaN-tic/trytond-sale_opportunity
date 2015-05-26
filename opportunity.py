@@ -168,6 +168,7 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
                 ('converted', 'converted'),
                 ('converted', 'won'),
                 ('converted', 'lost'),
+                ('won', 'opportunity'),
                 ('lost', 'lead'),
                 ('cancelled', 'lead'),
                 ))
@@ -179,7 +180,9 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
                         'tryton-clear', 'tryton-go-previous'),
                     },
                 'opportunity': {
-                    'invisible': ~Eval('state').in_(['lead']),
+                    'invisible': ~Eval('state').in_(['lead', 'won']),
+                    'icon': If(Eval('state') == 'won',
+                        'tryton-go-previous', 'tryton-go-next'),
                     },
                 'convert': {
                     'invisible': ~Eval('state').in_(
@@ -192,8 +195,7 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
                     'invisible': ~Eval('state').in_(['lead', 'opportunity']),
                     },
                 'won': {
-                    'invisible': (~Eval('state').in_(['opportunity']) |
-                        ~Eval('sale_state').in_(['none']))
+                    'invisible': (~Eval('state').in_(['opportunity']))
                     },
                 })
 
