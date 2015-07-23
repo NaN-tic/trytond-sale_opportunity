@@ -17,7 +17,7 @@ def process_opportunity(func):
         pool = Pool()
         Opportunity = pool.get('sale.opportunity')
         func(cls, sales)
-        with Transaction().set_user(0, set_context=True):
+        with Transaction().set_context(_check_access=False):
             Opportunity.process([o for s in cls.browse(sales)
                 for o in s.opportunities])
     return wrapper
