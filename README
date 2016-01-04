@@ -3,6 +3,11 @@ trytond_sale_opportunity
 
 The sale_opportunity module of the Tryton application platform.
 
+
+https://codeship.com/projects/a30f3830-9538-0133-ffdc-520d149e6bdf/status?branch=default
+https://codeship.com/projects/a30f3830-9538-0133-ffdc-520d149e6bdf/status?branch=3.8
+https://codeship.com/projects/a30f3830-9538-0133-ffdc-520d149e6bdf/status?branch=3.4
+
 Installing
 ----------
 
