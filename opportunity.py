@@ -116,22 +116,22 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
 
     @classmethod
     def __register__(cls, module_name):
-        cursor = Transaction().cursor
+        cursor = Transaction().connection.cursor()
         TableHandler = backend.get('TableHandler')
         sql_table = cls.__table__()
 
         reference_exists = True
-        if TableHandler.table_exist(cursor, cls._table):
-            table = TableHandler(cursor, cls, module_name)
+        if TableHandler.table_exist(cls._table):
+            table = TableHandler(cls, module_name)
             reference_exists = table.column_exist('reference')
 
-        table = TableHandler(cursor, cls, module_name)
+        table = TableHandler(cls, module_name)
         # Migration from 2.8: amount renamed into expected_amount
         if table.column_exist('amount'):
             table.column_rename('amount', 'expected_amount')
 
         super(SaleOpportunity, cls).__register__(module_name)
-        table = TableHandler(cursor, cls, module_name)
+        table = TableHandler(cls, module_name)
 
         # Migration from 2.8: make party not required and add reference as
         # required
@@ -495,13 +495,13 @@ class OpportunitySale(ModelSQL):
         super(OpportunitySale, cls).__register__(module_name)
         Opportunity = Pool().get('sale.opportunity')
         TableHandler = backend.get('TableHandler')
-        cursor = Transaction().cursor
+        cursor = Transaction().connection.cursor()
         sql_table = cls.__table__()
         opportunity = Opportunity.__table__()
 
         # Migration from 2.8: convert Many2One field 'sale' to Many2Many
         # field 'sales'
-        opportunity_table = TableHandler(cursor, Opportunity, module_name)
+        opportunity_table = TableHandler(Opportunity, module_name)
         if opportunity_table.column_exist('sale'):
             cursor.execute(*opportunity.select(
                 opportunity.id, opportunity.sale,
@@ -555,8 +555,8 @@ class SaleOpportunityLine(ModelSQL, ModelView):
     def __register__(cls, module_name):
         SaleLine = Pool().get('sale.line')
         TableHandler = backend.get('TableHandler')
-        cursor = Transaction().cursor
-        table = TableHandler(cursor, cls, module_name)
+        cursor = Transaction().connection.cursor()
+        table = TableHandler(cls, module_name)
         sql_table = cls.__table__()
         sale_line = SaleLine.__table__()
 
