@@ -17,7 +17,7 @@ this repository contains the full copyright notices and license terms. -->
     </group>
     <label name="probability"/>
     <field name="probability"/>
-    <notebook colspan="4">
+     <notebook colspan="4">
         <page string="Lead/Opportunity" id="opportunity">
             <label name="company"/>
             <field name="company"/>
@@ -57,10 +57,10 @@ this repository contains the full copyright notices and license terms. -->
                     icon="tryton-go-next"/>
             </group>
         </page>
-        <page name="lines">
+      <page name="lines">
             <field name="lines"/>
         </page>
-        <page name="sales">
+          <page name="sales">
             <field name="sales"/>
         </page>
         <page name="history">

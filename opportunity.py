@@ -473,6 +473,7 @@ class OpportunitySale(ModelSQL):
     'Opportunity - Sale'
     __name__ = 'sale.opportunity-sale.sale'
     _table = 'opportunity_sale_rel'
+
     opportunity = fields.Many2One('sale.opportunity', 'Opportunity',
             ondelete='CASCADE', select=True, required=True)
     sale = fields.Many2One('sale.sale', 'Sale',
@@ -510,12 +511,12 @@ class OpportunitySale(ModelSQL):
         for op in opportunities:
             op.set_sale_state()
 
-
     @classmethod
     def create(cls, vlist):
         res = super(OpportunitySale, cls).create(vlist)
         for r in res:
             r.opportunity.set_sale_state()
+
 
 class SaleOpportunityLine(ModelSQL, ModelView):
     'Sale Opportunity Line'
@@ -616,6 +617,7 @@ class SaleOpportunityLine(ModelSQL, ModelView):
 class SaleOpportunityHistory(ModelSQL, ModelView):
     'Sale Opportunity History'
     __name__ = 'sale.opportunity.history'
+
     date = fields.DateTime('Change Date')
     opportunity = fields.Many2One('sale.opportunity', 'Sale Opportunity')
     user = fields.Many2One('res.user', 'User')
@@ -664,7 +666,7 @@ class SaleOpportunityHistory(ModelSQL, ModelView):
                 opportunity_history.create_uid),
             ]
         for name, field in cls._fields.iteritems():
-            if name in ('id', 'opportunity', 'date', 'user'):
+            if name in ('id', 'opportunity', 'date', 'user', 'rec_name'):
                 continue
             try:
                 field.sql_type()
@@ -728,6 +730,7 @@ class ConvertOpportunity(Wizard):
 class SaleOpportunityEmployee(ModelSQL, ModelView):
     'Sale Opportunity per Employee'
     __name__ = 'sale.opportunity_employee'
+
     employee = fields.Many2One('company.employee', 'Employee')
     number = fields.Integer('Number')
     won = fields.Integer('Won')
