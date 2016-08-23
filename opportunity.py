@@ -609,8 +609,7 @@ class SaleOpportunityLine(ModelSQL, ModelView):
                 sale=sale,
                 description=None,
                 )
-        for k, v in sale_line.on_change_product().iteritems():
-            setattr(sale_line, k, v)
+        sale_line.on_change_product()
         return sale_line
 
 
