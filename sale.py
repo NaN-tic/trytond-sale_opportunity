@@ -54,6 +54,13 @@ class Sale:
         super(Sale, cls).delete(sales)
 
     @classmethod
+    def copy(cls, sales, default):
+        if not default:
+            default = {}
+        default['opportunities'] = None
+        return super(Sale, cls).copy(sales, default)
+
+    @classmethod
     @process_opportunity
     def cancel(cls, sales):
         super(Sale, cls).cancel(sales)
@@ -82,6 +89,10 @@ class SaleLine:
             'readonly': Eval('_parent_invoice', {}).get('state') != 'draft',
             })
 
+    @staticmethod
+    def default_origin():
+        return None
+
     @classmethod
     def get_origin(cls):
         Model = Pool().get('ir.model')
@@ -94,3 +105,10 @@ class SaleLine:
     @classmethod
     def _get_origin(cls):
         return ['sale.opportunity.line']
+
+    @classmethod
+    def copy(cls, lines, default):
+        if not default:
+            default = {}
+        default['origin'] = None
+        return super(SaleLine, cls).copy(lines, default)
