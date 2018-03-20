@@ -667,12 +667,7 @@ class SaleOpportunityHistory(ModelSQL, ModelView):
         for name, field in cls._fields.iteritems():
             if name in ('id', 'opportunity', 'date', 'user', 'rec_name'):
                 continue
-            try:
-                # TODO: The filestore patch does no longer raise
-                # NotImplementedError but returns None in sql_type()
-                if not field.sql_type():
-                    continue
-            except NotImplementedError:
+            if not field.sql_type():
                 continue
             column = Column(opportunity_history, name)
             columns.append(column.as_(name))
