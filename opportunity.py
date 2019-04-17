@@ -300,19 +300,18 @@ class SaleOpportunity(Workflow, ModelSQL, ModelView):
         Return sale for an opportunity
         '''
         Sale = Pool().get('sale.sale')
-        with Transaction().set_user(0, set_context=True):
-            sale = Sale(
-                description=self.description,
-                party=self.party,
-                payment_term=self.payment_term,
-                company=self.company,
-                invoice_address=self.address,
-                shipment_address=self.address,
-                currency=self.company.currency,
-                sale_date=None,
-                )
-            if hasattr(self.party, 'customer_payment_type'):
-                sale.payment_type = self.party.customer_payment_type
+        sale = Sale(
+            description=self.description,
+            party=self.party,
+            payment_term=self.payment_term,
+            company=self.company,
+            invoice_address=self.address,
+            shipment_address=self.address,
+            currency=self.company.currency,
+            sale_date=None,
+            )
+        if hasattr(self.party, 'customer_payment_type'):
+            sale.payment_type = self.party.customer_payment_type
         return sale
 
     def create_sale(self):
@@ -600,15 +599,14 @@ class SaleOpportunityLine(ModelSQL, ModelView):
         Return sale line for opportunity line
         '''
         SaleLine = Pool().get('sale.line')
-        with Transaction().set_user(0, set_context=True):
-            sale_line = SaleLine(
-                type='line',
-                quantity=self.quantity,
-                unit=self.unit,
-                product=self.product,
-                sale=sale,
-                description=None,
-                )
+        sale_line = SaleLine(
+            type='line',
+            quantity=self.quantity,
+            unit=self.unit,
+            product=self.product,
+            sale=sale,
+            description=None,
+            )
         sale_line.on_change_product()
         return sale_line
 
